@@ -94,7 +94,7 @@
                   <li><a><i class="fa fa-bar-chart-o"></i> Laporan Presensi <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
              
-                      <li><a href="<?php echo base_url();?>wali_kelas/lihat_presensi">Data Presensi</a></li>
+                      <li><a href="<?php echo base_url();?>wali_kelas/lihat_laporan">Data Laporan Presensi</a></li>
                     </ul>
                   </li>
                 </ul>

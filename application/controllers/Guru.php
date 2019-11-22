@@ -148,23 +148,23 @@ class Guru extends CI_Controller
 		$data['rombel'] = $this->m_guru->tampil_rombelpresensi3()->result();
 		$data['lihat_presensi'] = $this->m_guru->tampil_presensi3();
 	
-		
-		$this->load->view('templates_guru/header_guru',$data);
-		$this->load->view('view_guru/daftarkelas_presensi3', $data);
-		$this->load->view('templates_guru/footer_guru', $data);
+		$data['content']   =  'view_guru/daftarkelas_presensi3';
+   		$this->load->view('templates_guru/templates_guru',$data); 
+
 
 	}
-	public function input_presensi12()
+	public function input_presensi12($id_kelas)
 	{
-		$id_rombel = $this->uri->segment(3);
-		$data['siswa'] = $this->m_guru->tampil_namasiswa($id_rombel)->result();
-		$data['jadwalll'] = $this->m_guru->tampil_jadwalll()->result();
-		$data['keterangan'] = $this->m_guru->tampil_keterangan()->result();
-	
-		$this->load->view('templates_guru/header_guru',$data);
-		$this->load->view('view_guru/inputpresensi12', $data);
-		$this->load->view('templates_guru/footer_guru', $data);
+		$urikelas = $this->uri->segment(4);
+		$id_kelas_fk = $this->uri->segment(3); // mengambil get url urutan slice ke 3
+		$data['kelas'] = urldecode($urikelas); 
+		$data['siswa'] = $this->m_guru->tampil_namasiswa($id_kelas)->result();
+		$data['jadwalll'] = $this->m_guru->tampil_jadwalll($id_kelas_fk)->result();
+		$data['keterangan_presensi'] = $this->m_guru->tampil_keterangan()->result();
 
+		$data['content']   =  'view_guru/inputpresensi12';
+   		$this->load->view('templates_guru/templates_guru',$data);
+	
 		
 
 	}
@@ -231,27 +231,30 @@ class Guru extends CI_Controller
 		public function update_presensi12()
 	{
 	
-		$jam_datang = $this->input->post('jam_datang');
-		$jam_pulang = $this->input->post('jam_pulang');
+		$config['upload_path']      = 'foto/presensi/';
+            $config['allowed_types']    = 'gif|jpg|png';
+            $config['max_size']         = '2000';
+            $config['max_width']        = '3000';
+            $config['max_height']       = '3000';       
+                $this->upload->initialize($config);
+                if(!$this->upload->do_upload('gambar')){
+                    $gambar="";
+                    $error = $this->upload->display_errors();
+                }else{
+                    $gambar=$this->upload->file_name;
+                }
+
 		$kd_keterangan = $this->input->post('kd_keterangan');
-		$id_jadwal = $this->input->post('id_jadwal');
-		$id_siswa = $this->input->post('id_siswa');
 		$id_presensi = $this->input->post('id_presensi');
-		
 	 
 		$data = array(
-			
-			'jam_datang'=> $jam_datang,
-			'jam_pulang'=> $jam_pulang,
-			'kd_keterangan' => $kd_keterangan,
-			'id_jadwal'=> $id_jadwal,
-			'id_siswa' => $id_siswa
-			
-			
 
+			'kd_keterangan_fk' => $kd_keterangan,
+			'foto' => $gambar
 
 		);
 	 
+		
 		
 	 
 		$this->m_guru->update_presensi12( $id_presensi,$data);

@@ -33,6 +33,31 @@ class M_wali extends CI_Model
 		return $this->db->get()->result();
 		
 	}
+	function tampil_namasiswa($id_kelas)
+	{
+		$this->db->select('*');
+		$this->db->from('siswa');
+		$this->db->join('kelas', 'siswa.id_kelas_fk = kelas.id_kelas');
+		$this->db->where('siswa.id_kelas_fk', $id_kelas);
+		return $this->db->get();
+	
+	}
+	
+	function tampil_keterangan()
+	{
+		return $this->db->get('keterangan_presensi');
+	
+	}
+	function tampil_jadwalll()
+	{
+		$this->db->select('*');
+		$this->db->from('jadwal_pelajaran');
+		$this->db->join('mata_pelajaran', 'jadwal_pelajaran.kd_mapel_fk = mata_pelajaran.kd_mapel');
+
+		//$this->db->where(' jadwal_pelajaran.id_guru_fk = $id_guru');
+		return $this->db->get();
+	}
+
 	 function tampil_guru($id)
 	{
 	//return $this->db->get('guru');

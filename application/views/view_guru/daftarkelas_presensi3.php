@@ -1,7 +1,4 @@
-<div class="right_col" role="main">
-<div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
+   <div class="x_panel">
       <div class="container">
 
   
@@ -25,7 +22,7 @@
           <td><?php echo $no++ ?></td>
           <TD><?php echo $r->nama_kelas  ?> </TD>
           <td>
-            <?php echo anchor('guru/input_presensi12/'.$r->id_rombel,'<i class="fas fa-plus-square"></i>'); ?>
+            <?php echo anchor('guru/input_presensi12/'.$r->id_kelas.'/'.$r->nama_kelas,'<i class="fas fa-plus-square"></i>'); ?>
          
               
             </td>
@@ -42,10 +39,7 @@
     
 
       </table>
-</form>
-
-
-                      
+</form>                    
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">

@@ -125,6 +125,32 @@ class Wali_kelas extends CI_Controller
 
 		
 	}
+		public function input_presensi12($id_wali)
+	{
+		$urikelas = $this->uri->segment(4);
+		$id_kelas_fk = $this->uri->segment(3); // mengambil get url urutan slice ke 3
+		$data['kelas'] = urldecode($urikelas); 
+		$data['siswa'] = $this->m_wali->tampil_namasiswa($id_wali)->result();
+		$data['jadwalll'] = $this->m_wali->tampil_jadwalll($id_kelas_fk)->result();
+		$data['keterangan_presensi'] = $this->m_guru->tampil_keterangan()->result();
+
+		$data['content']   =  'view_wali/inputpresensi12';
+   		$this->load->view('templates_wali/templates_wali',$data);
+	
+		
+
+	}
+		public function lihat_laporan() 
+	{
+
+	// $id_wali = $this->session->userdata("id_wali");
+	$data['presensi'] = $this->m_wali->tampil_presensi($id_wali);
+
+	$data['content']   =  'view_wali/lihat_laporan';
+    $this->load->view('templates_wali/templates_wali',$data);
+
+		
+	}
 
 	
 }
