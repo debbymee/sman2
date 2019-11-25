@@ -20,8 +20,6 @@ class Admin extends CI_Controller
 	}
 	public function index()
 	{ 
-
-
 		$data = array(
 
 			'judul' => 'sman2'
@@ -95,7 +93,25 @@ class Admin extends CI_Controller
 
 		public function update_user()
 	{
-	
+
+		if($this->input->post('password') == '' || $this->input->post('password') == null){
+		$id = $this->input->post('id');
+		$username = $this->input->post('username');
+		$pass = md5($password);
+		$role_id = $this->input->post('role');
+
+		
+	 
+		$data = array(
+			'username' => $username,
+			'role_id_fk' => $role_id
+
+		);
+
+		}
+
+		else{
+
 		$id = $this->input->post('id');
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
@@ -110,6 +126,10 @@ class Admin extends CI_Controller
 			'role_id_fk' => $role_id
 
 		);
+
+		}
+	
+		
 	 
 		
 	 
@@ -246,9 +266,6 @@ class Admin extends CI_Controller
 		redirect('admin/daftar_jadwal12');
 	}
 
-// CONTROLLER PRESENSI
-		
-// PRESENSI KELAS 12
 
 		public function lihat_presensi12() 
 	{
@@ -297,11 +314,7 @@ class Admin extends CI_Controller
 		$cekjadwalpresensi = $this->m_data->getmapelpresensi($cekid_jadwal);
 		$jadwal_pelajaran = $this->m_data->get_mjadwalpresensi($cekid_jadwal);
 		if (count($jadwal_pelajaran) > 0 && $cek_tgl > 0 && count($cekjadwalpresensi) > 0) {
-			// echo "<script>
-			// alert('Data Absensi Sudah Ada');
-			// window.location.href='/sman2app/admin/lihat_presensi12/$cektgl';
-			// </script>";
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Absensi Telah Ditambahkan! </div>');
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Absensi Sudah Ada! </div>');
 			redirect('admin/lihat_presensi12');
 
 		} else {
@@ -593,6 +606,12 @@ class Admin extends CI_Controller
 
 		public function hapus_wali()
 	{
+		$id = $this->input->get('id');
+
+		$row   = $this->m_data->get_iduserwali($id);
+		$rowid = $row->id; 
+
+		$this->m_data->updatedeleteuserwali($rowid);
 
 		$this->db->delete('wali_kelas', array('id_wali'=> $this->input->get('id', FALSE)));
 		redirect('admin/daftar_wali');

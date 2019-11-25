@@ -3,17 +3,6 @@
 class M_data extends CI_Model
 {
 
-// ini model menjalankan stored procedure tampil pembelajaran
-	public function tampil_pembelajaran()
-	{
-        return $this->db->query("call tampil_pembelajaran();");
-    }
-
-     public function simpan($tahun_angkatan,$status)
-    {
-        return $this->db->query("call tambah_pembelajaran('".$tahun_angkatan."','".$status."')");                   
-    }
-
      function get_iduser($id_guru)
     {
       $this->db->select('*');    
@@ -25,12 +14,20 @@ class M_data extends CI_Model
     }
 
     function updateuserwali($rowid){
-		
-		$sql = "UPDATE users SET role_id_fk = 3 WHERE id = $rowid";
-        $this->db->query($sql);
+	
+        $this->db->set('role_id_fk', 3);
+        $this->db->where('id', $rowid);
+		$this->db->update('users');
 		
 	}
 
+	 function updatedeleteuserwali($rowid){
+	
+        $this->db->set('role_id_fk', 2);
+        $this->db->where('id', $rowid);
+		$this->db->update('users');
+		
+	}
 
 
 // ini model biasa tabel pembelajaran
@@ -377,6 +374,17 @@ class M_data extends CI_Model
 		$this->db->where('id_presensi', $id_presensi);
 		$this->db->update('presensi',$data);
 	}
+
+	function get_iduserwali($id)
+    {
+      $this->db->select('users.id');    
+      $this->db->from('users');
+      $this->db->join('guru', 'users.id = guru.id_user_fk');
+      $this->db->join('wali_kelas', 'guru.id_guru = wali_kelas.id_guru_fk');
+      $this->db->where('wali_kelas.id_wali', $id);
+      $query=$this->db->get();
+      return $query->row();
+    }
 
 }
 

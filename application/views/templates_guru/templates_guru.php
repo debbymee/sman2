@@ -29,6 +29,11 @@
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url('public') ?>/css/custom.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+     <link href="<?php echo base_url('public') ?>/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('public') ?>/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('public') ?>/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('public') ?>/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('public') ?>/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   </head>
 
 
@@ -53,7 +58,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-              <center> <img src="<?php echo base_url(); ?>foto/guru/<?php echo $this->session->userdata('foto')?> " alt="..." width=80% ></center>
+              <center> <img src="<?php echo base_url(); ?>foto/guru/<?php echo $this->session->userdata('foto')?> " alt="..." width=80% style="border: 3px solid white"></center>
               </div>
               <div class="profile_info">
                 <font size="3px" color="white" style="font-family: arial ">Nama akun user : </font>
@@ -85,6 +90,14 @@
                   <li><a><i class="fa fa-bar-chart-o"></i>Presensi<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>guru/lihat_presensi12 ">Data Kehadiran Kelas XII</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-table"></i>Laporan<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="<?php echo base_url(); ?>Guru/laporan">Laporan Presensi</a></li>
+                      
                     </ul>
                   </li>
                 </ul>
@@ -192,6 +205,42 @@
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url('public') ?>/js/custom.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="<?php echo base_url('public') ?>/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+     <script type="text/javascript">
+    $(document).ready(function(){
+        $('#jadwal').change(function(){
+        
+          var id=$(this).val();
+            $.ajax({
+                url : "<?php echo base_url();?>guru/get_jadwalpresensi",
+                method : "POST",
+                data : {id: id},
+                async : false,
+                dataType : 'json',
+                success: function(data){
+                    var html = '';
+                    var i;
+                    for(i=0; i<data.length; i++){
+                        html += '<option value='+data[i].id_jadwal+'>'+data[i].jam_pelajaran+'</option>';
+                    }
+                    $('.jam_pelajaran').html(html);
+                     
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 

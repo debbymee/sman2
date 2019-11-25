@@ -54,6 +54,7 @@ class Loginbaru extends CI_Controller
 						'role_id_fk' => $cek['role_id_fk'],
 						'id_guru' => $cek['id_guru'],
 						'id_wali' => $cek['id_wali'],
+						'nama_guru' => $cek['nama_guru'],
 						'foto' => $cek['foto']
 					];
 					if ($cek['role_id_fk'] == '2') {

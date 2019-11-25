@@ -17,11 +17,8 @@ class Wali_kelas extends CI_Controller
 	public function index()
 	{ 
 
-
-		$data = array(
-
-			'judul' => 'dashboard_wali'
-		);
+		$data['graph'] = $this->m_wali->graph();
+		$data['abc'] = 'array';
 		$data['content']   =  'view_wali/dashboard';
         $this->load->view('templates_wali/templates_wali',$data); 
 	}
@@ -117,40 +114,104 @@ class Wali_kelas extends CI_Controller
 	public function lihat_presensi() 
 	{
 
-	$id_wali = $this->session->userdata("id_wali");
-	$data['presensi'] = $this->m_wali->tampil_presensi($id_wali);
+    $id_guru = $this->session->userdata('id_guru');
+	$row   = $this->m_wali->get_idkelas($id_guru);
+	$id_kelas = $row->id_kelas; 
+	$data['kelas'] = $row->nama_kelas;
+	$data['jadwal_pelajaran'] = $row->nama_pelajaran;
+	$data['presensi'] = $this->m_wali->tampil_presensi3($id_guru);
 
 	$data['content']   =  'view_wali/lihat_presensi';
     $this->load->view('templates_wali/templates_wali',$data);
 
 		
 	}
-		public function input_presensi12($id_wali)
+		public function input_presensi12()
 	{
-		$urikelas = $this->uri->segment(4);
-		$id_kelas_fk = $this->uri->segment(3); // mengambil get url urutan slice ke 3
-		$data['kelas'] = urldecode($urikelas); 
-		$data['siswa'] = $this->m_wali->tampil_namasiswa($id_wali)->result();
-		$data['jadwalll'] = $this->m_wali->tampil_jadwalll($id_kelas_fk)->result();
-		$data['keterangan_presensi'] = $this->m_guru->tampil_keterangan()->result();
-
+		$id_guru = $this->session->userdata('id_guru');
+		$row   = $this->m_wali->get_idkelas($id_guru);
+		$id_kelas = $row->id_kelas; 
+		$data['kelas'] = $row->nama_kelas; 
+		$data['siswa'] = $this->m_wali->tampil_namasiswa($id_guru)->result();
+		$data['jadwalll'] = $this->m_wali->tampil_jadwalll($id_guru)->result();
+		$data['keterangan_presensi'] = $this->m_wali->tampil_keterangan()->result();
 		$data['content']   =  'view_wali/inputpresensi12';
    		$this->load->view('templates_wali/templates_wali',$data);
-	
+	}
 		
 
-	}
-		public function lihat_laporan() 
+	function get_jadwalpresensi(){
+        $id=$this->input->post('id');
+        $data=$this->m_wali->get_mjadwalpresensi($id);
+        echo json_encode($data);
+    }
+
+    public function tambah_presensi12()
 	{
 
-	// $id_wali = $this->session->userdata("id_wali");
-	$data['presensi'] = $this->m_wali->tampil_presensi($id_wali);
+		$cektgl = $this->input->post('tglcek');
+		$cekid_jadwal  = $this->input->post('id_jadwal');
+		$cek_tgl = $this->m_wali->cek_absen($cektgl);
+		$cekjadwalpresensi = $this->m_wali->getmapelpresensi($cekid_jadwal);
+		$jadwal_pelajaran = $this->m_wali->get_mjadwalpresensi($cekid_jadwal);
+		if (count($jadwal_pelajaran) > 0 && $cek_tgl > 0 && count($cekjadwalpresensi) > 0) {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Absensi Sudah Ada! </div>');
+			redirect('Wali_kelas/lihat_presensi');
 
-	$data['content']   =  'view_wali/lihat_laporan';
-    $this->load->view('templates_wali/templates_wali',$data);
+		} else {
+		 	$no=1;
+						
+			$nm = $this->input->post('id_siswa');
+			$id_jadwal = $this->input->post('id_jadwal_fk');
+			$tanggal = $this->input->post('tgl');
+		    $result = array();
+		    foreach($nm AS $key => $val){
+			    $result[] = array(
+				    "tgl"  => $tanggal,
+				    "kd_keterangan_fk"  => $_POST['kd_keterangan'][$key],
+				    "id_jadwal_fk"  => $id_jadwal,
+				    "id_siswa_fk"  => $_POST['id_siswa'][$key]
+			    );
+			}
+		}
+		$this->m_wali->input_presensi12($result);
+
+		$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"> Berhasil Dibuat! </div>');
+		redirect('Wali_kelas/lihat_presensi');
+    }
+
+    public function lihat_laporan() 
+	{
+
+	    $id_guru = $this->session->userdata('id_guru');
+    	$data['jadwalll'] = $this->m_wali->tampil_jadwal_laporan($id_guru)->result();
+    	$data['content']   =  'view_wali/formlaporan';
+   		$this->load->view('templates_wali/templates_wali',$data);
 
 		
 	}
+
+    function lihat_laporan_presensi(){
+$data['nama'] = $this->session->userdata('nama_guru');
+        $tgl = $this->input->post('tgl');
+        $data['jadwal'] = $this->input->post('tgl');
+        $id_jadwal = $this->input->post('id_jadwal');
+        $id_wali = $this->session->userdata('id_wali');
+        
+        $row   = $this->m_wali->get_kelaswali($id_wali);
+	    $id_kelas = $row->id_kelas; 
+	    $data['kelas'] = $row->nama_kelas;
+
+	    $rowjadwal   = $this->m_wali->get_jadwal($id_jadwal);
+	    $data['jam_pelajaran'] = $rowjadwal->jam_pelajaran;
+	    $data['nama_pelajaran'] = $rowjadwal->nama_pelajaran;
+
+
+
+    	$data['siswa'] = $this->m_wali->tampil_presensi_laporan($id_jadwal,$tgl)->result();
+    	$data['content']   =  'view_wali/lihat_laporan';
+   		$this->load->view('templates_wali/templates_wali',$data);
+    }
 
 	
 }

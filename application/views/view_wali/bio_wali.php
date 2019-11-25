@@ -8,6 +8,12 @@
 		<?= $this->session->flashdata('message'); ?>
 
 	<form>
+		<?php
+				foreach ($wali as $foto){
+			 ?>
+	<center><img src="<?php echo base_url(); ?>foto/guru/<?php echo $foto->foto; ?>" style="width: 15%;height: 15%"></center>
+	<br>
+	<?php } ?>
 		<table class="table table-striped table-bordered table-hover table-condensed" >
 			<tr align="center" style="color: black" >
 				<td >NO</td>
@@ -17,7 +23,7 @@
 				<td>ALAMAT</td>
 				<td>NO HP</td>
 				<td>AKUN USER</td>
-				<td>FOTO</td>
+				
 
 			</tr>
 
@@ -33,7 +39,7 @@
 			 	<td><?php echo $gr->alamat ?></td>
 			 	<td><?php echo $gr->no_hp; ?></td>
 			 	<td><?php echo $gr->username; ?></td>
-			 	<td><?php echo $gr->foto; ?>
+
 		
 			 </tr>
 

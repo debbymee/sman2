@@ -78,12 +78,14 @@
 		return $this->db->get();
 	
 	}
-	function tampil_namasiswa($id_kelas)
+	function tampil_namasiswa($id_guru)
 	{
 		$this->db->select('*');
 		$this->db->from('siswa');
 		$this->db->join('kelas', 'siswa.id_kelas_fk = kelas.id_kelas');
-		$this->db->where('siswa.id_kelas_fk', $id_kelas);
+		$this->db->join('jadwal_pelajaran', 'kelas.id_kelas = jadwal_pelajaran.id_kelas_fk');
+		$this->db->where('jadwal_pelajaran.id_guru_fk', $id_guru);
+		$this->db->group_by('siswa.id_siswa');
 		return $this->db->get();
 	
 	}
@@ -101,25 +103,28 @@
 		return $this->db->get('keterangan_presensi');
 	
 	}
-	function tampil_jadwalll()
+	function tampil_jadwalll($id_guru)
 	{
 		$this->db->select('*');
 		$this->db->from('jadwal_pelajaran');
 		$this->db->join('mata_pelajaran', 'jadwal_pelajaran.kd_mapel_fk = mata_pelajaran.kd_mapel');
-
-		//$this->db->where(' jadwal_pelajaran.id_guru_fk = $id_guru');
+		$this->db->where(' jadwal_pelajaran.id_guru_fk',$id_guru);
+		$this->db->group_by('jadwal_pelajaran.kd_mapel_fk');
 		return $this->db->get();
 	}
 
-	function cek_absen($cektgl,$cekrombel)
-	{	
-		$sql = "SELECT * FROM presensi join siswa on presensi.id_siswa = siswa.id_siswa join rombel on siswa.id_rombel = rombel.id_rombel WHERE presensi.tgl='$cektgl' and siswa.id_rombel=$cekrombel";
-        $cek = $this->db->query($sql);
-        return $cek->row();
+	function tampil_jadwal_laporan($id_guru)
+	{
+		$this->db->select('*');
+		$this->db->from('jadwal_pelajaran');
+		$this->db->join('mata_pelajaran', 'jadwal_pelajaran.kd_mapel_fk = mata_pelajaran.kd_mapel');
+		$this->db->where(' jadwal_pelajaran.id_guru_fk',$id_guru);
+		return $this->db->get();
 	}
 
+	
 //
-		function tampil_presensi3()
+		function tampil_presensi3($id_guru)
 	{   
 
 
@@ -130,8 +135,7 @@
 		$this->db->join('keterangan_presensi', 'presensi.kd_keterangan_fk = keterangan_presensi.kd_keterangan');
 		$this->db->join('jadwal_pelajaran', ' presensi.id_jadwal_fk = jadwal_pelajaran.id_jadwal');
 		$this->db->join('mata_pelajaran', 'jadwal_pelajaran.kd_mapel_fk = mata_pelajaran.kd_mapel');
-
-		//$this->db->where('tingkat_kelas = 12');
+		$this->db->where('jadwal_pelajaran.id_guru_fk',$id_guru);
 
 
 		return $this->db->get()->result();
@@ -157,6 +161,44 @@
 	
 		
 	}
+
+	 function get_idkelas($id_guru)
+    {
+      $this->db->select(' kelas.nama_kelas, kelas.id_kelas,mata_pelajaran.nama_pelajaran');    
+      $this->db->from('kelas');
+      $this->db->join('jadwal_pelajaran', 'kelas.id_kelas = jadwal_pelajaran.id_kelas_fk');
+      $this->db->join('mata_pelajaran', 'mata_pelajaran.kd_mapel = jadwal_pelajaran.kd_mapel_fk');
+      $this->db->where('jadwal_pelajaran.id_guru_fk', $id_guru);
+      $this->db->group_by('jadwal_pelajaran.kd_mapel_fk');
+      $query=$this->db->get();
+      return $query->row();
+    }
+    function cek_absen($cektgl)
+	{	
+		$sql = "SELECT * FROM presensi where tgl = '$cektgl'";
+        $cek = $this->db->query($sql);
+        return $cek->row_array();
+	}
+	function get_mjadwalpresensi($id)
+	{
+        $this->db->select('*');
+        $this->db->from('jadwal_pelajaran');
+        $this->db->where('kd_mapel_fk', $id);
+
+     	return $this->db->get()->result();
+    }
+    function getmapelpresensi($id)
+    {
+    	$this->db->select('*');
+        $this->db->from('presensi');
+        $this->db->join('jadwal_pelajaran', 'presensi.id_jadwal_fk = jadwal_pelajaran.id_jadwal');
+        $this->db->join('mata_pelajaran', 'jadwal_pelajaran.kd_mapel_fk = mata_pelajaran.kd_mapel');
+        $this->db->where('kd_mapel_fk', $id);
+
+     	return $this->db->get()->result();
+
+    	
+    }
 
 
  }

@@ -31,20 +31,14 @@
                   <div class="col-md-6">
                     <h3>Jaringan Aktivitas</h3>
                   </div>
-                  <div class="col-md-6">
-                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                    </div>
-                  </div>
+                  
                 </div>
 
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                  <div id="chart_plot_01" class="demo-placeholder"></div>
+                <div id="container" class="col-md-8 col-sm-9 col-xs-12" style="height: 10%">
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+                <div class="col-md-4 col-sm-3 col-xs-12 bg-white">
                   <div class="x_title">
-                    <h2>Fitur Yang Sering Dikunjungi : </h2>
+                    <h2>Fitur Yang Sering Dikunjungi :</h2>
                     <div class="clearfix"></div>
                   </div>
 
@@ -85,3 +79,4 @@
             </div>
 
           </div>
+         

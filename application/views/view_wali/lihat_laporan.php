@@ -4,54 +4,45 @@
 		<h2 style="color: green " align="center"> DAFTAR PRESENSI SISWA KELAS 12</h2>
 		<hr>
 		 <br><br>
-
-   <form action="<?php echo base_url(); ?>wali_kelas/tambah_presensi12" method ="post"  class="form-horizontal form-label-left" enctype="multipart/form-data" >
-
-
-
- 		<h2 style="color: green " id="tgl">
- 			<b> Wali Kelas : XII IPS 3 &nbsp;&nbsp;&nbsp;
- 		
- 			<b> <input type="date" value="<?php echo date('Y-m-d'); ?>">
- 				<i class="far fa-calendar-alt"></i> 
- 				&nbsp;&nbsp;&nbsp;<button>CETAK</button>
+ 		 <table>
+ 	<tr>
+ 		<td><h2 style="color: green " id="tgl"><b>Tanggal</b></h2></td>
+ 		<td><h2 style="color: green " id="tgl"><b> : <input type="date" value="<?php echo $jadwal ?>" readonly></b></h2></td>
+ 	</tr>
+ 	<tr>
+ 		<td><h2 style="color: green " id="kelas"><b>KELAS</b></h2></td>
+ 		<td><h2 style="color: green " id="kelas"><b> : <?php echo $kelas?></b></h2></td>
+ 	</tr>
+ 	<tr>
+ 		<td><h2 style="color: green " id="kelas"><b>JADWAL PELAJARAN</b></h2></td>
+ 		<td><h2 style="color: green " id="kelas"><b> : <?php echo $nama_pelajaran?> / <?php echo $jam_pelajaran?></b></h2></td>
+ 	</tr>
+ 	<tr>
+ 		<td><h2 style="color: green " id="kelas"><b>WALI KELAS</b></h2></td>
+ 		<td><h2 style="color: green " id="kelas"><b> : <?php echo $nama?></b></h2></td>
+ 	</tr>
+ 	</table>
+ 				
 
 		<br><br> 		
-		<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+		<table class="table table-striped table-bordered table-hover table-condensed" >
 			<thead>
 
 			<tr align="center"> 
 				<td>NO</td>
 				<td>NAMA SISWA</td>
-				<td>KELAS</td>
-				<td>TANGGAL</td>
-         		<td>JAM DATANG</td>
-         		<td>JAM PULANG</td>
          		<td>KETERANGAN</td>
-         		<td>JADWAL PELAJARAN</td>
-         		<td>AKSI</td>
-			
 			</tr>
 			</thead>
 			<tbody>
 
             <?php
             $no = 1; 
-            foreach($presensi as $keha) { ?>
+            foreach($siswa as $keha) { ?>
 				<tr>
 					<td><?php echo $no++ ?></td>
 					<td><?php echo $keha->nama_siswa  ?></td>
-					<td><?php echo $keha->nama_kelas ?></td>
-					<td><?php echo $keha->tgl  ?></td>
-                    <td><?php echo $keha->jam_datang  ?></td>
-                    <td><?php echo $keha->jam_pulang  ?></td>
 					<td><?php echo $keha->nama_keterangan  ?></td>
-					<td><?php echo $keha->nama_pelajaran ?></td>
-	
-					<td>
-			 	<?php echo anchor('wali_kelas/edit_presensi10/'.$keha->id_presensi,'<i class="fas fa-edit"></i>'); ?>
-				
-				</td>
 					
 					
 				</tr>
@@ -62,7 +53,7 @@
 
 			</table>
 		</tbody>
-</form>
+
 
 </div>
 </div>

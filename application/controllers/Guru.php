@@ -136,32 +136,27 @@ class Guru extends CI_Controller
 	public function lihat_presensi12() 
 	{
 
-	$data['presensi'] = $this->m_guru->tampil_presensi3();
+	$id_guru = $this->session->userdata('id_guru');
+	$row   = $this->m_guru->get_idkelas($id_guru);
+	$id_kelas = $row->id_kelas; 
+	$data['kelas'] = $row->nama_kelas;
+	$data['jadwal_pelajaran'] = $row->nama_pelajaran;
+	$data['presensi'] = $this->m_guru->tampil_presensi3($id_guru);
 	//$data['siswa'] = $this->m_data->tampil_psiswa()->result();
 	$data['content']   =  'view_guru/detail_presensi3';
     $this->load->view('templates_guru/templates_guru',$data); 
 
 	}
-	public function daftarkelas_presensi3()
-	{
-
-		$data['rombel'] = $this->m_guru->tampil_rombelpresensi3()->result();
-		$data['lihat_presensi'] = $this->m_guru->tampil_presensi3();
 	
-		$data['content']   =  'view_guru/daftarkelas_presensi3';
-   		$this->load->view('templates_guru/templates_guru',$data); 
-
-
-	}
-	public function input_presensi12($id_kelas)
+	public function input_presensi12()
 	{
-		$urikelas = $this->uri->segment(4);
-		$id_kelas_fk = $this->uri->segment(3); // mengambil get url urutan slice ke 3
-		$data['kelas'] = urldecode($urikelas); 
-		$data['siswa'] = $this->m_guru->tampil_namasiswa($id_kelas)->result();
-		$data['jadwalll'] = $this->m_guru->tampil_jadwalll($id_kelas_fk)->result();
+		$id_guru = $this->session->userdata('id_guru');
+		$row   = $this->m_guru->get_idkelas($id_guru);
+		$id_kelas = $row->id_kelas; 
+		$data['kelas'] = $row->nama_kelas; 
+		$data['siswa'] = $this->m_guru->tampil_namasiswa($id_guru)->result();
+		$data['jadwalll'] = $this->m_guru->tampil_jadwalll($id_guru)->result();
 		$data['keterangan_presensi'] = $this->m_guru->tampil_keterangan()->result();
-
 		$data['content']   =  'view_guru/inputpresensi12';
    		$this->load->view('templates_guru/templates_guru',$data);
 	
@@ -172,47 +167,36 @@ class Guru extends CI_Controller
 	public function tambah_presensi12()
 	{
 
+		$cektgl = $this->input->post('tglcek');
+		$cekid_jadwal  = $this->input->post('id_jadwal');
+		$cek_tgl = $this->m_guru->cek_absen($cektgl);
+		$cekjadwalpresensi = $this->m_guru->getmapelpresensi($cekid_jadwal);
+		$jadwal_pelajaran = $this->m_guru->get_mjadwalpresensi($cekid_jadwal);
+		if (count($jadwal_pelajaran) > 0 && $cek_tgl > 0 && count($cekjadwalpresensi) > 0) {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Absensi Sudah Ada! </div>');
+			redirect('guru/lihat_presensi12');
 
-	$cektgl = $this->input->post('tglcek');
-	$cekrombel = $this->input->post('rombelcek');
-
-	$cek = $this->m_guru->cek_absen($cektgl,$cekrombel);
-
-	if ($cek > 0) {
-	// echo "<script>
-	// alert('Data Absensi Sudah Ada');
-	// window.location.href='/sman2app/home/input_presensi10/$cekrombel';
-	// </script>";
-		$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Data Absensi Hari Ini Sudah ada! </div>');
-		redirect('guru/lihat_presensi12');
-
-	}else {
-		 
-				
-	$nm = $this->input->post('id_siswa');
-    $result = array();
-    foreach($nm AS $key => $val){
-    $result[] = array(
-      "tgl"  => $_POST['tgl'][$key],
-      "jam_datang"  => $_POST['jam_datang'][$key],
-      "jam_pulang"  => $_POST['jam_pulang'][$key],
-      "kd_keterangan"  => $_POST['kd_keterangan'][$key],
-      "id_jadwal"  => $_POST['id_jadwal'][$key],
-      "id_siswa"  => $_POST['id_siswa'][$key]
-
-     );
-    
-   	
+		} else {
+		 	$no=1;
+						
+			$nm = $this->input->post('id_siswa');
+			$id_jadwal = $this->input->post('id_jadwal_fk');
+			$tanggal = $this->input->post('tgl');
+		    $result = array();
+		    foreach($nm AS $key => $val){
+			    $result[] = array(
+				    "tgl"  => $tanggal,
+				    "kd_keterangan_fk"  => $_POST['kd_keterangan'][$key],
+				    "id_jadwal_fk"  => $id_jadwal,
+				    "id_siswa_fk"  => $_POST['id_siswa'][$key]
+			    );
+			}
 		}
-	}
 		$this->m_guru->input_presensi12($result);
-	
+
 		$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"> Berhasil Dibuat! </div>');
 		redirect('guru/lihat_presensi12');
-
-		
-	
-}
+    }
 	public function edit_presensi12($id_presensi)
 	{
 		
@@ -262,4 +246,33 @@ class Guru extends CI_Controller
 	
 		
 	}
+	function get_jadwalpresensi(){
+        $id=$this->input->post('id');
+        $data=$this->m_guru->get_mjadwalpresensi($id);
+        echo json_encode($data);
+    }
+
+    function laporan(){
+
+        $id_guru = $this->session->userdata('id_guru');
+    	$data['jadwalll'] = $this->m_guru->tampil_jadwal_laporan($id_guru)->result();
+    	$data['content']   =  'view_guru/formlaporan';
+   		$this->load->view('templates_guru/templates_guru',$data);
+    }
+
+    function lihat_laporan_presensi(){
+
+    	$tgl=$this->input->post('tgl');
+    	$id=$this->input->post('id_jadwal');
+
+    	$data['presensi'] = $this->m_guru->tampil_jadwal_laporan($tgl,$id)->result();
+    	$data['content']   =  'view_guru/tampillaporanpresensi';
+   		$this->load->view('templates_guru/templates_guru',$data);
+
+
+
+
+
+    }
+
 }

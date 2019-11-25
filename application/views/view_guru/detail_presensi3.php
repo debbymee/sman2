@@ -1,12 +1,12 @@
                 <div class="x_panel">
 			<div class="container">
 
-		<h2 style="color: green " align="center"> DAFTAR PRESENSI SISWA KELAS 12</h2>
+		<h2 style="color: green " align="center"> DAFTAR PRESENSI SISWA KELAS - <?php echo $kelas?> - <?php echo $jadwal_pelajaran?> </h2>
 		<hr>
 		 <br><br>
 		 <?= $this->session->flashdata('message'); ?>
       
-		<a href="<?php echo base_url(); ?>Guru/daftarkelas_presensi3"> <button type="button" class="btn btn-success btn-lg"  > + INPUTKAN PRESENSI</button> </a>
+		<a href="<?php echo base_url(); ?>Guru/input_presensi12"> <button type="button" class="btn btn-success btn-lg"  > + INPUTKAN PRESENSI</button> </a>
 		 <br><br>
 
 
