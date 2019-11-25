@@ -192,7 +192,8 @@ class Wali_kelas extends CI_Controller
 	}
 
     function lihat_laporan_presensi(){
-$data['nama'] = $this->session->userdata('nama_guru');
+    	$this->load->library('pdf');
+		$data['nama'] = $this->session->userdata('nama_guru');
         $tgl = $this->input->post('tgl');
         $data['jadwal'] = $this->input->post('tgl');
         $id_jadwal = $this->input->post('id_jadwal');
@@ -210,7 +211,11 @@ $data['nama'] = $this->session->userdata('nama_guru');
 
     	$data['siswa'] = $this->m_wali->tampil_presensi_laporan($id_jadwal,$tgl)->result();
     	$data['content']   =  'view_wali/lihat_laporan';
-   		$this->load->view('templates_wali/templates_wali',$data);
+
+   		$html = $this->load->view('templates_wali/templates_wali',$data); 
+	    $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan-petanikode.pdf";
+        $this->pdf->load_view('view_wali/lihat_laporan', $data);
     }
 
 	
