@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2019 at 04:01 AM
+-- Generation Time: Nov 26, 2019 at 07:10 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -44,12 +44,12 @@ CREATE TABLE `guru` (
 --
 
 INSERT INTO `guru` (`id_guru`, `nama_guru`, `jk`, `nip`, `alamat`, `no_hp`, `foto`, `id_user_fk`) VALUES
-(1, 'Enny Nurmawati', 'perempuan', '  670', 'Jl.hana', '  0812246124', 'icon.jpg', 2),
-(2, 'Erwin Joko Susanto ', 'Laki-laki', '67012', 'jl.mangga', '081224612433', '', 3),
-(3, 'Edy Susanto', 'Laki-laki', '67013', 'jl.aceh', '081224612406', '', 4),
+(1, 'Enny Nurmawati SP.d', 'perempuan', '123', 'Jl.hana', '081224', 'ps.jpg', 2),
+(2, 'Erwin Joko Susanto ', 'perempuan', ' 6772', 'jl.mangga', '   081224612', 'ayat3.jpg', 3),
+(3, 'Edy Susanto', 'laki-laki', ' 6701', 'jl.aceh', ' 08122461240', 'photo_2.jpg', 4),
 (4, 'Dety Purwantini', 'Perempuan', '67014', 'jl.banda', '081224612470', '', 5),
 (5, 'Supariyanto', 'Laki-laki', '67015', 'jl.angkasa', '081230230565', '', 6),
-(6, 'Wiwik Andayani', 'Perempuan', '67017', 'jl.laut', '081230230555', '', 7),
+(6, 'Wiwik Andayani SP.d', 'perempuan', '67017', 'jl.laut', '081230230555', 'ps1.jpg', 7),
 (7, 'Idham Jauhari Priyambodo Wirawan', 'Laki-laki', '67018', 'jl.kakan', '081224612407', '', 23),
 (8, 'Miftahul Mujtahidin', 'Laki-laki', '67019', 'jl.nangka', '081230230567', '', 8),
 (9, 'Dinar Wirantika', 'Perempuan', '67020', 'jl.gagak', '081224612400', '', 9),
@@ -58,7 +58,6 @@ INSERT INTO `guru` (`id_guru`, `nama_guru`, `jk`, `nip`, `alamat`, `no_hp`, `fot
 (12, 'Kikie Andriani', 'Perempuan', '67023', 'Jl.danau', '087743781416', '', 28),
 (13, 'Indah Kristina', 'Perempuan', '67026', 'jl.gagak', '081224612499', '', 27),
 (14, 'Luqman Hakim', 'Laki-laki', '67025', 'jl.ikan', '087743781415', '', 16),
-(15, 'Siti Maisyaroh', 'laki-laki', '67028', ' jl.unta', ' 08122461246', '', 26),
 (21, 'Erna Widyawati', 'perempuan', '67029', ' jl hongkong', ' 08122461241', '', 11),
 (22, 'Agus Nur Sofan', 'laki-laki', '67030', ' jl.hayati', ' 08122461222', '', 12),
 (23, 'Mohammad Fihir', 'laki-laki', '67031', ' jl.nagrek', ' 08774378141', '', 13),
@@ -69,7 +68,7 @@ INSERT INTO `guru` (`id_guru`, `nama_guru`, `jk`, `nip`, `alamat`, `no_hp`, `fot
 (28, 'Rani Asmara', 'perempuan', '67042', ' jl.naga', ' 08122461244', '', 19),
 (29, 'Akhmad Qomarudin', 'laki-laki', '67043', ' jl.apel', ' 08122461240', '', 20),
 (30, 'Fatimah', 'perempuan', '67044', ' jl.anggur', ' 08122461240', '', 21),
-(31, 'Wiwik Windarti', 'perempuan', '67045', ' jl.bebek', ' 08122461241', '', 29),
+(31, 'Wiwik Windarti SP.d', 'perempuan', '67045', ' jl.bebek', ' 08122461241', '', 29),
 (32, 'Rr. Supeningsih', 'perempuan', '67046', ' jl.hartono', ' 08122461240', '', 30);
 
 -- --------------------------------------------------------
@@ -117,16 +116,10 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `jurusan`, `tingkat_kelas`, `ruangan`, `id_wali_fk`) VALUES
-(1, 'XII IPS 1', 'IPS', '12', 'XII-IPS1', 14),
-(2, 'XII IPS 2', 'IPS', '12', 'XII-IPS2', 6),
 (3, 'XII IPS 3', 'IPS', '12', 'XII-IPS3', 7),
 (4, 'XII IPS 4', 'IPS', '12', 'XII-IPS4', 8),
-(5, 'XII MIPA 1', 'IPA', '12', 'XII-IPA1', 9),
 (6, 'XII MIPA 2', 'IPA', '12', 'XII-IPA2', 10),
-(7, 'XII MIPA 3', 'IPA', '12', 'XII-IPA3', 11),
-(8, 'XII MIPA 4', 'IPA', '12', 'XII-IPA4', 12),
-(9, 'XII MIPA 5', 'IPA', '12', 'XII-IPA5', 13),
-(10, 'XII MIPA 6', 'IPA', '12', 'XII-IPA6', 15);
+(8, 'XII MIPA 4', 'IPA', '12', 'XII-IPA4', 12);
 
 -- --------------------------------------------------------
 
@@ -192,7 +185,8 @@ INSERT INTO `mata_pelajaran` (`kd_mapel`, `nama_pelajaran`) VALUES
 
 CREATE TABLE `presensi` (
   `id_presensi` int(11) NOT NULL,
-  `tgl` date NOT NULL,
+  `tgl` varchar(20) NOT NULL,
+  `foto` varchar(200) NOT NULL,
   `kd_keterangan_fk` varchar(2) NOT NULL,
   `id_jadwal_fk` int(11) NOT NULL,
   `id_siswa_fk` int(11) NOT NULL
@@ -202,11 +196,15 @@ CREATE TABLE `presensi` (
 -- Dumping data for table `presensi`
 --
 
-INSERT INTO `presensi` (`id_presensi`, `tgl`, `kd_keterangan_fk`, `id_jadwal_fk`, `id_siswa_fk`) VALUES
-(67, '2019-11-18', 'A', 1, 1),
-(68, '2019-11-18', 'I', 1, 4),
-(69, '2019-11-18', 'S', 3, 1),
-(70, '2019-11-18', 'S', 3, 4);
+INSERT INTO `presensi` (`id_presensi`, `tgl`, `foto`, `kd_keterangan_fk`, `id_jadwal_fk`, `id_siswa_fk`) VALUES
+(153, '2019-11-18', '', 'H', 1, 1),
+(154, '2019-11-18', '', 'H', 1, 4),
+(159, '2019-11-20', '', 'A', 1, 1),
+(160, '2019-11-20', '', 'A', 1, 4),
+(161, '2019-11-23', '', 'A', 2, 1),
+(162, '2019-11-23', '', 'A', 2, 4),
+(163, '2019-11-24', '', 'A', 3, 1),
+(164, '2019-11-24', '', 'A', 3, 4);
 
 -- --------------------------------------------------------
 
@@ -257,22 +255,22 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role_id_fk`, `is_active`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, 1),
-(2, 'enny_nur', 'c8ffe9a587b126f152ed3d89a146b445', 2, 1),
-(3, 'erwin_joko', '202cb962ac59075b964b07152d234b70', 2, 1),
-(4, 'edy_susanto', '202cb962ac59075b964b07152d234b70', 2, 1),
+(2, 'enny_nur', '202cb962ac59075b964b07152d234b70', 2, 1),
+(3, 'erwin_joko', '7363a0d0604902af7b70b271a0b96480', 2, 1),
+(4, 'edy_susanto', '7363a0d0604902af7b70b271a0b96480', 2, 1),
 (5, 'dety_purwantini', '202cb962ac59075b964b07152d234b70', 2, 1),
 (6, 'supariyanto', '202cb962ac59075b964b07152d234b70', 2, 1),
-(7, 'wiwik_andayani', '202cb962ac59075b964b07152d234b70', 2, 1),
+(7, 'wiwik_andayani', '202cb962ac59075b964b07152d234b70', 3, 1),
 (8, 'miftahul_mujtahidin', '202cb962ac59075b964b07152d234b70', 2, 1),
 (9, 'dinar_wirantika', '202cb962ac59075b964b07152d234b70', 2, 1),
-(10, 'sunarto', '202cb962ac59075b964b07152d234b70', 2, 1),
+(10, 'sunarto', '202cb962ac59075b964b07152d234b70', 3, 1),
 (11, 'erna_widyawati', '202cb962ac59075b964b07152d234b70', 2, 1),
 (12, 'agus_nursofan', '202cb962ac59075b964b07152d234b70', 2, 1),
 (13, 'mohamad_fihir', '202cb962ac59075b964b07152d234b70', 2, 1),
 (14, 'martiningsih', '202cb962ac59075b964b07152d234b70', 2, 1),
 (15, 'utono', '202cb962ac59075b964b07152d234b70', 2, 1),
 (16, 'luqman_hakim', '202cb962ac59075b964b07152d234b70', 2, 1),
-(17, 'tri_hartatik', '202cb962ac59075b964b07152d234b70', 2, 1),
+(17, 'tri_hartatik', '77e69c137812518e359196bb2f5e9bb9', 2, 1),
 (19, 'rani_asmara', '202cb962ac59075b964b07152d234b70', 2, 1),
 (20, 'akhmad_qomarudin', '202cb962ac59075b964b07152d234b70', 2, 1),
 (21, 'fatimah', '202cb962ac59075b964b07152d234b70', 2, 1),
@@ -321,16 +319,10 @@ CREATE TABLE `wali_kelas` (
 --
 
 INSERT INTO `wali_kelas` (`id_wali`, `id_guru_fk`) VALUES
-(13, 2),
-(6, 4),
 (7, 6),
 (8, 8),
 (10, 22),
-(12, 23),
-(9, 26),
-(11, 27),
-(15, 31),
-(14, 32);
+(12, 23);
 
 --
 -- Indexes for dumped tables
@@ -419,7 +411,7 @@ ALTER TABLE `wali_kelas`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `jadwal_pelajaran`
@@ -431,13 +423,13 @@ ALTER TABLE `jadwal_pelajaran`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT for table `siswa`
@@ -461,7 +453,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `wali_kelas`
 --
 ALTER TABLE `wali_kelas`
-  MODIFY `id_wali` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_wali` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -471,47 +463,47 @@ ALTER TABLE `wali_kelas`
 -- Constraints for table `guru`
 --
 ALTER TABLE `guru`
-  ADD CONSTRAINT `guru_ibfk_1` FOREIGN KEY (`id_user_fk`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `guru_ibfk_1` FOREIGN KEY (`id_user_fk`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `jadwal_pelajaran`
 --
 ALTER TABLE `jadwal_pelajaran`
-  ADD CONSTRAINT `jadwal_pelajaran_ibfk_1` FOREIGN KEY (`kd_mapel_fk`) REFERENCES `mata_pelajaran` (`kd_mapel`),
-  ADD CONSTRAINT `jadwal_pelajaran_ibfk_2` FOREIGN KEY (`id_kelas_fk`) REFERENCES `kelas` (`id_kelas`),
-  ADD CONSTRAINT `jadwal_pelajaran_ibfk_3` FOREIGN KEY (`id_guru_fk`) REFERENCES `guru` (`id_guru`);
+  ADD CONSTRAINT `jadwal_pelajaran_ibfk_1` FOREIGN KEY (`kd_mapel_fk`) REFERENCES `mata_pelajaran` (`kd_mapel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `jadwal_pelajaran_ibfk_2` FOREIGN KEY (`id_kelas_fk`) REFERENCES `kelas` (`id_kelas`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `jadwal_pelajaran_ibfk_3` FOREIGN KEY (`id_guru_fk`) REFERENCES `guru` (`id_guru`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`id_wali_fk`) REFERENCES `wali_kelas` (`id_wali`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`id_wali_fk`) REFERENCES `wali_kelas` (`id_wali`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `presensi`
 --
 ALTER TABLE `presensi`
-  ADD CONSTRAINT `presensi_ibfk_1` FOREIGN KEY (`id_siswa_fk`) REFERENCES `siswa` (`id_siswa`),
-  ADD CONSTRAINT `presensi_ibfk_2` FOREIGN KEY (`id_jadwal_fk`) REFERENCES `jadwal_pelajaran` (`id_jadwal`),
-  ADD CONSTRAINT `presensi_ibfk_3` FOREIGN KEY (`kd_keterangan_fk`) REFERENCES `keterangan_presensi` (`kd_keterangan`);
+  ADD CONSTRAINT `presensi_ibfk_1` FOREIGN KEY (`id_siswa_fk`) REFERENCES `siswa` (`id_siswa`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `presensi_ibfk_2` FOREIGN KEY (`id_jadwal_fk`) REFERENCES `jadwal_pelajaran` (`id_jadwal`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `presensi_ibfk_3` FOREIGN KEY (`kd_keterangan_fk`) REFERENCES `keterangan_presensi` (`kd_keterangan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `siswa`
 --
 ALTER TABLE `siswa`
-  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_kelas_fk`) REFERENCES `kelas` (`id_kelas`);
+  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_kelas_fk`) REFERENCES `kelas` (`id_kelas`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id_fk`) REFERENCES `user_role` (`id_role`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id_fk`) REFERENCES `user_role` (`id_role`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `wali_kelas`
 --
 ALTER TABLE `wali_kelas`
-  ADD CONSTRAINT `wali_kelas_ibfk_1` FOREIGN KEY (`id_guru_fk`) REFERENCES `guru` (`id_guru`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `wali_kelas_ibfk_1` FOREIGN KEY (`id_guru_fk`) REFERENCES `guru` (`id_guru`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

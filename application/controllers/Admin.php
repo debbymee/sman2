@@ -606,16 +606,25 @@ class Admin extends CI_Controller
 
 		public function hapus_wali()
 	{
+
 		$id = $this->input->get('id');
 
 		$row   = $this->m_data->get_iduserwali($id);
 		$rowid = $row->id; 
 
+		$this->db->delete('wali_kelas', array('id_wali'=> $this->input->get('id', FALSE)));
+		if ($this->db->error()){
+
+    	$this->session->set_flashdata('message','<div class="alert alert-info" role="alert">Data Tidak Bisa Hapus </div>');
+    	redirect('admin/daftar_wali');
+
+								}
 		$this->m_data->updatedeleteuserwali($rowid);
 
-		$this->db->delete('wali_kelas', array('id_wali'=> $this->input->get('id', FALSE)));
-		redirect('admin/daftar_wali');
-	}
+		
+
+		
+}
 
 
 // CONTROLLER SISWA
