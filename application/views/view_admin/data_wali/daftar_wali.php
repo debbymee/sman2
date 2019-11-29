@@ -12,7 +12,7 @@
 
 
 	<form>
-		<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+		 <table id="datatable" class="table table-striped table-bordered">
 		<thead>
 			<tr align="center">
 				<td>NO</td>
@@ -41,6 +41,7 @@
 			 	<td>
 			 	
 				      <a href="#" data-id="<?php echo $wl->id_wali ?>" class="sa-remove-wt btn btn-sm btn-danger">Hapus</a>
+				      
 				</td>
 			 </tr>
 
@@ -57,4 +58,6 @@
 </div>
 </div>
 </div>
+
+
 

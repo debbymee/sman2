@@ -26,7 +26,7 @@
                        <option>Pilih</option>
                         <?php foreach ($jadwalll as $dj) : ?>
 
-                          <option value="<?php echo $dj->id_jadwal ?>"><?php echo $dj->jam_pelajaran ?>
+                          <option value="<?php echo $dj->id_jadwal ?>"><?php echo $dj->nama_pelajaran ?> - <?php echo $dj->jam_pelajaran ?>
                           </option>
                         <?php endforeach ?>
            

@@ -7,7 +7,7 @@ class Guru extends CI_Controller
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('m_guru');
-
+        $this->load->helper('date');
 
 	
 		if ($this->session->userdata('role_id_fk')!='2')
@@ -19,12 +19,19 @@ class Guru extends CI_Controller
 	public function index()
 	{ 
 
-
+        $tgl = "%Y-%m-%d";
 		$data = array(
 
 			'judul' => 'dashboard guru'
 		);
 		$data['content']   =  'view_guru/dashboard';
+		$data['guru'] = $this->m_guru->countguru();
+		$data['wali'] = $this->m_guru->countwali();
+		$data['siswa'] = $this->m_guru->countsiswa();
+		$id_guru = $this->session->userdata('id_guru');
+		$row = $this->m_guru->tampilhadirsemua($id_guru,$tgl);
+		$data['total']          = $row->total;
+		$data['presensikehadiran'] = $this->m_guru->tampilhadir($id_guru,$tgl);
         $this->load->view('templates_guru/templates_guru',$data); 
 	}
 		public function nickname($id)
@@ -274,5 +281,8 @@ class Guru extends CI_Controller
 
 
     }
+
+    
+			
 
 }

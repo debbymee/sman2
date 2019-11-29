@@ -200,6 +200,45 @@
     	
     }
 
+    function countguru(){
+    $this->db->select('count(id_guru) as totalcount');
+	$this->db->from('guru');
+	return $this->db->get()->result();
+    }
+
+     function countwali(){
+    $this->db->select('count(id_wali) as totalcount');
+    $this->db->from('wali_kelas');
+	return $this->db->get()->result();
+    }
+
+    function countsiswa(){
+    $this->db->select('count(id_siswa) as totalcount');
+    $this->db->from('siswa');
+	return $this->db->get()->result();
+    }
+
+    function tampilhadir($id_guru,$tgl){
+    $this->db->select('COUNT(kd_keterangan_fk) as jumlah,keterangan_presensi.nama_keterangan, COUNT(presensi.id_siswa_fk) as total');
+    $this->db->from('presensi');
+    $this->db->join('jadwal_pelajaran', 'presensi.id_jadwal_fk = jadwal_pelajaran.id_jadwal');
+    $this->db->join('keterangan_presensi', 'presensi.kd_keterangan_fk = keterangan_presensi.kd_keterangan');
+    $array = array('jadwal_pelajaran.id_guru_fk' => $id_guru);
+    $this->db->where($array);
+    $this->db->group_by('kd_keterangan_fk');
+	return $this->db->get()->result();
+    }
+
+    function tampilhadirsemua($id_guru,$tgl){
+    $this->db->select('COUNT(id_presensi) as total');
+    $this->db->from('presensi');
+    $this->db->join('jadwal_pelajaran', 'presensi.id_jadwal_fk = jadwal_pelajaran.id_jadwal');
+    $this->db->join('keterangan_presensi', 'presensi.kd_keterangan_fk = keterangan_presensi.kd_keterangan');
+    $array = array('jadwal_pelajaran.id_guru_fk' => $id_guru);
+    $this->db->where($array);
+	return $this->db->get()->row();
+    }
+
 
  }
 
