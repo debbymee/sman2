@@ -31,6 +31,14 @@
                         </div>
 
                     </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-4 col-sm-3 col-xs-12" for="tgl_lahir"> TANGGAL LAHIR <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="date" id="tgl_lahir" name="tgl_lahir" required="required" data-validate-minmax="10,100" >
+                        </div>
+                      </div>
+
 
                     <div class="item form-group">
                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="jk">Jenis Kelamin <span class="required">*</span>

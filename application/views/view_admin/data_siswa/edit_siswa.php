@@ -1,5 +1,4 @@
 
-  <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
     <div class="container">
       <center><h2 style="color: green "> EDIT DATA SISWA</h2></center> <hr>
@@ -56,8 +55,13 @@
 
           <select class="btn btn-default dropdown-toggle" name="jk" value="<?php echo $siswa->jk ?>">
           
-            <option value="laki-laki"> laki-laki</option>
+          <?php if($guru->jk == 'laki-laki') {?>
+            <option value="laki-laki" selected> laki-laki</option>
             <option value="perempuan">Perempuan</option>
+          <?php } else { ?>
+              <option value="laki-laki"> laki-laki</option>
+            <option value="perempuan" selected>Perempuan</option>
+            <?php } ?>
           </select>
                         
         <?php echo form_error('jk', '<small class="text-danger pl-3">', '</small>'); ?> <br>  
@@ -85,7 +89,7 @@
           </label>
 
           <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" id="tempat_lahir" name="tempat_lahir"placeholder="masukkan tempat lahir siswa"  required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value=" <?php echo $siswa->tempat_lahir ?>">
+            <input type="text" id="tempat_lahir" name="tempat_lahir" placeholder="masukkan tempat lahir siswa"  required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="<?php echo $siswa->tempat_lahir ?>">
 
             <?php echo form_error('tempat_lahir', '<small class="text-danger pl-3">', '</small>'); ?> <br> 
 
@@ -96,7 +100,7 @@
         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="tgl_lahir"> TANGGAL LAHIR <span class="required">*</span>
         </label>
         <div class="col-md-3 col-sm-6 col-xs-12">
-              <input type="date" id="tgl_lahir" name="tgl_lahir" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="<?php echo str_replace('-', '/', $siswa->tgl_lahir) ?>" >
+              <input type="date" id="tgl_lahir" name="tgl_lahir" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="<?php echo $siswa->tgl_lahir ?>"  >
               <?php echo form_error('tgl_lahir', '<small class="text-danger pl-3">', '</small>'); ?> <br> 
 
        </div>
@@ -107,7 +111,7 @@
        </label>
 
         <div class="col-md-3 col-sm-6 col-xs-12">
-        <input type="text" id="nik" name="nik" placeholder="masukkan nik siswa 10 kar"  required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value=" <?php echo $siswa->nik ?>">
+        <input type="text" id="nik" name="nik" placeholder="masukkan nik siswa 10 kar"  required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="<?php echo $siswa->nik ?>">
 
          <?php echo form_error('nik', '<small class="text-danger pl-3">', '</small>'); ?> <br> 
        </div>
@@ -142,7 +146,7 @@
 
           <div class="col-md-3 col-sm-6 col-xs-12">
 
-            <input id="alamat" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"name="alamat" placeholder="masukkan alamat"  type="text" value=" <?php echo $siswa->alamat ?>">
+            <input id="alamat" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"name="alamat" placeholder="masukkan alamat"  type="text" value="<?php echo $siswa->alamat ?>">
                         
             <?php echo form_error('alamat', '<small class="text-danger pl-3">', '</small>'); ?> <br> 
 
@@ -170,7 +174,7 @@
                     <label class="control-label col-md-4 col-sm-6 col-xs-12" for="no_hp">NO HP ORANG TUA <span class="required">*</span>
                     </label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                       <input type="text" id="no_hp" name="no_hp" placeholder="masukkan no_hp siswa 10 kar"  required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                       <input type="text" id="no_hp" name="no_hp" placeholder="masukkan no_hp siswa 10 kar"  required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="<?php echo $siswa->no_hp_ortu ?>">
                    </div>
                  </div>
 

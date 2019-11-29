@@ -192,7 +192,8 @@ class Wali_kelas extends CI_Controller
 	}
 
     function lihat_laporan_presensi(){
-    	$this->load->library('pdf');
+
+    	$this->load->library('Pdf');
 		$data['nama'] = $this->session->userdata('nama_guru');
         $tgl = $this->input->post('tgl');
         $data['jadwal'] = $this->input->post('tgl');
@@ -211,6 +212,7 @@ class Wali_kelas extends CI_Controller
 
     	$data['siswa'] = $this->m_wali->tampil_presensi_laporan($id_jadwal,$tgl)->result();
     	$data['content']   =  'view_wali/lihat_laporan';
+
 
    		$html = $this->load->view('templates_wali/templates_wali',$data); 
 	    $this->pdf->setPaper('A4', 'potrait');

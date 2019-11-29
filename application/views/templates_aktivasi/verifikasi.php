@@ -32,15 +32,15 @@
 			<div class="wrap-login100">
 
 
-				<form action="<?php echo base_url('Aktivasi/aktiv_val') ?>" method="post" class="login100-form validate-form p-l-55 p-r-55 p-t-178">  
+				<form action="<?php echo base_url('aktivasi/aktiv_val') ?>" method="post" class="login100-form validate-form p-l-55 p-r-55 p-t-178">  
 					<span class="login100-form-title">
 						AKTIVASI AKUN
 					</span>
 					<?= $this->session->flashdata('message'); ?>
 						<div class="wrap-input100 ">
 		   				
-		    				<input class="input100"  type="text" class="form-control" id="exampleInputnisn" aria-describedby="emailHelp" placeholder="Masukkan NISN" name="nisn" value="<?php echo set_value('nisn'); ?>">
-		   					<?php echo form_error('nisn', '<small class="text-danger pl-3">', '</small>'); ?> <br>	
+		    				<input class="input100"  type="text" class="form-control" id="exampleInputnisn" aria-describedby="emailHelp" placeholder="Masukkan nip" name="nip" value="<?php echo set_value('nip'); ?>">
+		   					<?php echo form_error('nip', '<small class="text-danger pl-3">', '</small>'); ?> <br>	
 		 			 </div>
 
 					<div class="wrap-input100 ">

@@ -49,12 +49,22 @@
 					</div>
 
 					<br><br>
-
+	
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
 							SUBMIT
 						</button>
-					</div><br>
+					</div>
+					<div class="flex-col-c p-t-80 p-b-40">
+						<span class="txt1 p-b-9">
+							Belum ada akun?
+						</span>
+
+						<a href="<?php echo base_url() ?>aktivasi/aktivasi " class="txt3">
+							Aktivasi Akun
+						</a>
+					</div>
+			
 		
 				</form>
 			</div>
