@@ -123,7 +123,7 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
-                    <li><a href="<?php echo base_url(); ?>index/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo base_url(); ?>index/logout">Log Out</a></li>
               </ul>
                   
               </ul>

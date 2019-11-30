@@ -53,7 +53,7 @@
 
 	
 					<td>
-			 	<?php echo anchor('wali_kelas/edit_presensi12/'.$p->id_presensi,'<i class="fas fa-edit"></i>'); ?>
+			 		 	<a href="<?php echo site_url('wali_kelas/edit_presensi12/'.$p->id_presensi); ?>" class="btn btn-sm btn-info">Edit</a>
 				
 				</td>
 					

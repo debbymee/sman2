@@ -31,7 +31,7 @@
             <div class="col-md-3 col-sm-6 col-xs-12">
 
               <input id="password" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" 
-              name="password" placeholder="" required="required" type="password" value="<?php echo $login->password ?>">
+              name="password" placeholder="" required="required" type="password" value="">
             
               <?php echo form_error('password', '<small class="text-danger pl-3">', '</small>'); ?> <br>  
               
