@@ -44,17 +44,11 @@
 					</div>
 
 					<div class="wrap-input100">
-						<input class="input100" type="password" name="password1" placeholder="password" >
-						<?php echo form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?> <br>	
+						<input class="input100" type="password" name="password" placeholder="password" >
+						<?php echo form_error('password', '<small class="text-danger pl-3">', '</small>'); ?> <br>	
 
 					</div>
-					
-					<div class="wrap-input100">
-						<input class="input100" type="password" name="password2" placeholder="Re Type password" >
-						<?php echo form_error('password2', '<small class="text-danger pl-3">', '</small>'); ?> <br>	
-
-					
-					</div>
+	
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">

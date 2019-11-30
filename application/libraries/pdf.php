@@ -1,4 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+require_once 'vendor/autoload.php';
 /**
  * CodeIgniter DomPDF Library
  *
@@ -42,6 +44,8 @@ class Pdf extends Dompdf{
      */
     public function load_view($view, $data = array()){
         $html = $this->ci()->load->view($view, $data, TRUE);
+        
+        $dompdf = new Dompdf();
         $this->load_html($html);
         // Render the PDF
         $this->render();

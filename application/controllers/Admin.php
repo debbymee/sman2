@@ -28,6 +28,7 @@ class Admin extends CI_Controller
         $this->load->view('templates/templates',$data); 
 	}
 
+	
 		public function daftar_user()
 	{
 
@@ -276,7 +277,7 @@ class Admin extends CI_Controller
 	{
 
 	$data['presensi'] = $this->m_data->tampil_presensi3();
-	//$data['siswa'] = $this->m_data->tampil_psiswa()->result();
+	//$data['guru'] = $this->m_data->tampil_pguru()->result();
 
 	$data['content']   =  'view_admin/presensi_kehadiran/detail_presensi3';
 	$this->load->view('templates/templates',$data);
@@ -422,10 +423,7 @@ class Admin extends CI_Controller
 
 	public function tambah_guru()
 	{
-		// $this->form_validation->set_rules('id_user_fk', 'id_user_fk','required|trim|is_unique[guru.id_user_fk]', [
-		// 	'is_unique' => 'id ini sudah terdaftar!']);
-		
-
+	
 		$this->form_validation->set_rules('nama_guru', 'nama_guru', 'required|trim|is_unique[guru.nama_guru]',[
 			'is_unique' => 'nama guru sudah terdaftar !']);
 
@@ -460,6 +458,7 @@ class Admin extends CI_Controller
                 }
 
 		$nama_guru = $this->input->post('nama_guru');
+		$tgl_lahir = $this->input->post('tgl_lahir');
 		$jk = $this->input->post('jk');
 		$nip = $this->input->post('nip');
 		$alamat = $this->input->post('alamat');
@@ -469,6 +468,7 @@ class Admin extends CI_Controller
 		$data = array(
 
 			'nama_guru'=> $this->input->post('nama_guru', true),
+			'tgl_lahir' => $this->input->post('tgl_lahir', true),
 			'jk'=> $this->input->post('jk', true),
 			'nip' => $this->input->post('nip', true),
 			'alamat'=> $this->input->post('alamat'),
@@ -516,6 +516,7 @@ class Admin extends CI_Controller
 
 		$kode2 = $this->input->post('kode');
 		$nama_guru = $this->input->post('nama_guru');
+		$tgl_lahir = $this->input->post('tgl_lahir');
 		$jk = $this->input->post('jk');
 		$nip = $this->input->post('nip');
 		$alamat = $this->input->post('alamat');
@@ -526,6 +527,7 @@ class Admin extends CI_Controller
 		$data = array(
 			
 			'nama_guru'=> $nama_guru,
+			'tgl_lahir'=> $tgl_lahir,
 			'jk'=> $jk,
 			'nip' => $nip,
 			'alamat'=> $alamat,
@@ -618,6 +620,7 @@ class Admin extends CI_Controller
 		$rowid = $row->id; 
 
 		$this->db->delete('wali_kelas', array('id_wali'=> $this->input->get('id', FALSE)));
+		// buat menangkap eror
 		if ($this->db->error()){
 
     	$this->session->set_flashdata('message','<div class="alert alert-info" role="alert">Data Tidak Bisa Hapus </div>');

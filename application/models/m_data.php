@@ -2,7 +2,23 @@
  
 class M_data extends CI_Model
 {
+	function tampil_guruw()
+	{
 
+		$this->db->select('*');
+		$this->db->from('users');
+		//$this->db->join('users', 'guru.id_user_fk = users.id');
+	
+		return $this->db->get();
+
+ 		//return $this->db->query("call tampil_guru();");
+	}
+	function registrasi_guru($data){
+		//$this->db->insert($table,$data);
+		$this->db->insert('users', $data);
+			
+	}
+// update role nya di login
      function get_iduser($id_guru)
     {
       $this->db->select('*');    
@@ -158,6 +174,13 @@ class M_data extends CI_Model
 		//return $this->db->get('guru');
 		return $this->db->get()->result();
 	}
+	function tampil_kelas_siswa()
+	{
+		$this->db->select('*');
+		$this->db->from('kelas');
+	}
+
+
 		function input_siswa($data)
 	{
 		$this->db->insert('siswa',$data);
@@ -246,12 +269,12 @@ class M_data extends CI_Model
 		//$this->db->where('tingkat_kelas = 10');
 		
 	}
-		function cek_jadwal($cekhari,$cekjam_mulai, $cekjam_selesai, $cek_mapel)
-	{	
-		$sql = "SELECT * FROM jadwalpelajaran join mata_pelajaran on jadwalpelajaran.kd_mapel = mata_pelajaran.kd_mapel  WHERE jadwalpelajaran.hari='$cekhari' and mata_pelajaran.kd_mapel='$cek_mapel'";
-        $cek = $this->db->query($sql);
-        return $cek->row();
-	}
+	// 	function cek_jadwal($cekhari,$cekjam_mulai, $cekjam_selesai, $cek_mapel)
+	// {	
+	// 	$sql = "SELECT * FROM jadwalpelajaran join mata_pelajaran on jadwalpelajaran.kd_mapel = mata_pelajaran.kd_mapel  WHERE jadwalpelajaran.hari='$cekhari' and mata_pelajaran.kd_mapel='$cek_mapel'";
+ //        $cek = $this->db->query($sql);
+ //        return $cek->row();
+	// }
 		function edit_jadwal($id)
 	{
 		return $this->db->get_where('jadwal_pelajaran',array('id_jadwal' => $id));

@@ -17,6 +17,7 @@
 			<tr align="center">
 				<td>NO</td>
 				<td>NAMA GURU</td>
+				<td>TANGGAL LAHIR</td>
 				<td>JK</td>
 				<td>NIP</td>
 				<td>ALAMAT</td>
@@ -35,6 +36,7 @@
 			 <tr>
 			 	<td><?php echo $no++ ?></td>
 			 	<td><?php echo $gr->nama_guru ?></td>
+			 	<td><?php echo $gr->tgl_lahir ?></td>
 			 	<td><?php echo $gr->jk ?></td>
 			 	<td><?php echo $gr->nip ?></td>
 			 	<td><?php echo $gr->alamat ?></td>
