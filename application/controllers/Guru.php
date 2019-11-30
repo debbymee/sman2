@@ -8,6 +8,7 @@ class Guru extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('m_guru');
         $this->load->helper('date');
+        $this->load->model('m_wali');
 
 	
 		if ($this->session->userdata('role_id_fk')!='2')
@@ -24,6 +25,7 @@ class Guru extends CI_Controller
 
 			'judul' => 'dashboard guru'
 		);
+		$data['graph'] = $this->m_wali->graph();
 		$data['content']   =  'view_guru/dashboard';
 		$data['guru'] = $this->m_guru->countguru();
 		$data['wali'] = $this->m_guru->countwali();
@@ -209,12 +211,10 @@ class Guru extends CI_Controller
 		
 		$id_prensensi = $this->uri->segment(3);
 		$data['siswa'] = $this->m_guru->eTampilPresensi($id_prensensi);
-		$data['jadwalll'] = $this->m_guru->tampil_jadwalll()->result();
-		$data['keterangan'] = $this->m_guru->tampil_keterangan()->result();
+		$data['keterangan_presensi'] = $this->m_guru->tampil_keterangan()->result();
 
-		$this->load->view('templates_guru/header_guru',$data);
-		$this->load->view('view_guru/edit_presensi12', $data);
-		$this->load->view('templates_guru/footer_guru', $data);
+			$data['content']   =  'view_guru/edit_presensi12';
+   		$this->load->view('templates_guru/templates_guru',$data);
 
 	
 

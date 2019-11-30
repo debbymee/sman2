@@ -74,7 +74,7 @@
                   <li><a href="<?php echo base_url(); ?>admin/index"><i class="fa fa-home"></i> Beranda </span></a>
                   </li>
 
-                  <li><a> <i class="fas fa-user"></i> &nbsp;&nbsp; User Management<span class="fa fa-chevron-down"> </span></a>
+                  <li><a> <i class="fas fa-user"></i> &nbsp;&nbsp;  User Management<span class="fa fa-chevron-down"> </span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url(); ?>admin/daftar_user"> Daftar User </a></li>
                     </ul>
@@ -118,7 +118,7 @@
                       
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presensi <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-bar-chart-o"></i>  Data Presensi <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      
                     
@@ -146,7 +146,7 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
-                    <li><a href="<?php echo base_url(); ?>index/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo base_url(); ?>index/logout"> Log Out</a></li>
               </ul>
               
 
@@ -305,6 +305,93 @@ $("#preview_gambar").change(function(){
                 },
                 function(){
                     window.location.href = "hapus_wali/?id="+ postId;
+                });
+            });
+
+    </script>
+
+    <script type="text/javascript">
+        
+  $('.sa-remove-user').click(function () {
+     var postId = $(this).data('id');
+                swal({
+                title: "Apakah anda yakin?",
+                text: "Data ini akan dihapus",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger waves-effect waves-light',
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: true,
+                closeOnCancel: true
+                },
+                function(){
+                    window.location.href = "hapus_user/?id="+ postId;
+                });
+            });
+
+    </script>
+
+    <script type="text/javascript">
+        
+  $('.sa-remove-guru').click(function () {
+     var postId = $(this).data('id');
+                swal({
+                title: "Apakah anda yakin?",
+                text: "Data ini akan dihapus",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger waves-effect waves-light',
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: true,
+                closeOnCancel: true
+                },
+                function(){
+                    window.location.href = "hapus_guru/?id="+ postId;
+                });
+            });
+
+    </script>
+    <script type="text/javascript">
+        
+  $('.sa-remove-siswa').click(function () {
+     var postId = $(this).data('id');
+                swal({
+                title: "Apakah anda yakin?",
+                text: "Data ini akan dihapus",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger waves-effect waves-light',
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: true,
+                closeOnCancel: true
+                },
+                function(){
+                    window.location.href = "hapus_siswa/?id="+ postId;
+                });
+            });
+
+    </script>
+
+    <script type="text/javascript">
+        
+  $('.sa-remove-jadwal').click(function () {
+     var postId = $(this).data('id');
+                swal({
+                title: "Apakah anda yakin?",
+                text: "Data ini akan dihapus",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger waves-effect waves-light',
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: true,
+                closeOnCancel: true
+                },
+                function(){
+                    window.location.href = "hapus_jadwal12/?id="+ postId;
                 });
             });
 

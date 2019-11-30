@@ -18,7 +18,6 @@ class Wali_kelas extends CI_Controller
 	{ 
 
 		$data['graph'] = $this->m_wali->graph();
-		$data['abc'] = 'array';
 		$data['content']   =  'view_wali/dashboard';
         $this->load->view('templates_wali/templates_wali',$data); 
 	}

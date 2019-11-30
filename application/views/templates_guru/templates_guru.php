@@ -87,17 +87,9 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-bar-chart-o"></i>Presensi<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-bar-chart-o"></i> Presensi<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>guru/lihat_presensi12 ">Data Kehadiran Kelas XII</a></li>
-                    </ul>
-                  </li>
-
-                  <li><a><i class="fa fa-table"></i>Laporan<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-
-                      <li><a href="<?php echo base_url(); ?>Guru/laporan">Laporan Presensi</a></li>
-                      
                     </ul>
                   </li>
                 </ul>
@@ -157,8 +149,9 @@
 
 
  <!--/ Footer-->
-
-  <script src="<?php echo base_url('vendor') ?>/js/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+ 
   <script src="<?php echo base_url('vendor') ?>/js/jquery.easing.min.js"></script>
   <script src="<?php echo base_url('vendor') ?>/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url('vendor') ?>/js/custom.js"></script>
@@ -166,7 +159,7 @@
 
 
     <!-- jQuery -->
-    <script src="<?php echo base_url('public') ?>/jquery/dist/jquery.min.js"></script>
+  
     <!-- Bootstrap -->
     <script src="<?php echo base_url('public') ?>/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -240,6 +233,54 @@
             });
         });
     });
+</script>
+
+ <script type="text/javascript">
+ 
+$(function(){
+  $('#container').highcharts({
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false
+    },
+    title: {
+      text: 'Data Presensi Hari Ini'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+          style: {
+            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+          }
+        }
+      }
+    },
+    series: [{
+      type: 'pie',
+      name: 'Persentase Penduduk',
+      data: [
+          <?php 
+          // data yang diambil dari database
+          if(count($graph)>0)
+          {
+             foreach ($graph as $data) {
+             echo "['" .$data->nama_keterangan . "'," . $data->jumlah ."],\n";
+             }
+          }
+          ?>
+      ]
+    }]
+  });
+});
+ 
 </script>
 
 </body>

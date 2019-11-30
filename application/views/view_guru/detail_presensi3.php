@@ -39,7 +39,7 @@
 					<td><?php echo $p->nama_keterangan  ?></td>
 					<td>
 						<?php if ($p->foto == '' || $p->foto==null) { ?>  
-						<?php echo "-";?>
+						<?php echo "<p style='text-align:center;''>-</p>";?>
 
 						 <?php } else { ?>
 						 	<a href="<?php echo base_url('foto/presensi/'.$p->foto);?>">Lihat disini</a>
@@ -53,7 +53,8 @@
 
 	
 					<td>
-			 	<?php echo anchor('admin/edit_presensi12/'.$p->id_presensi,'<i class="fas fa-edit"></i>'); ?>
+		
+			    <a href="<?php echo site_url('guru/edit_presensi12/'.$p->id_presensi); ?>" class="btn btn-sm btn-info">Edit</a>
 				
 				</td>
 					

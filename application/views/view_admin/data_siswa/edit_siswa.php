@@ -1,5 +1,4 @@
 
-  <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
     <div class="container">
       <center><h2 style="color: green "> EDIT DATA SISWA</h2></center> <hr>
@@ -194,7 +193,4 @@
      
 
   </div>
-</div>
-</div>
-</div>
 </div>

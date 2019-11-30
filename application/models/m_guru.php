@@ -90,11 +90,19 @@
 	
 	}
 
-	function eTampilPresensi($id_presensi){
+	function eTampilPresensi($id_presensi)
+	{
+		$this->db->select('*');
+		$this->db->from('presensi');
+		$this->db->join('siswa', 'presensi.id_siswa_fk = siswa.id_siswa');
+		$this->db->join('kelas','siswa.id_kelas_fk = kelas.id_kelas');
+		$this->db->join('jadwal_pelajaran', 'presensi.id_jadwal_fk = jadwal_pelajaran.id_jadwal');
+		$this->db->join('mata_pelajaran', 'jadwal_pelajaran.kd_mapel_fk = mata_pelajaran.kd_mapel');
+		$this->db->where('id_presensi', $id_presensi);
+		return $this->db->get()->result();
 
-		$sql = "SELECT * FROM presensi join siswa on presensi.id_siswa = siswa.id_siswa join rombel on siswa.id_rombel = rombel.id_rombel WHERE presensi.id_presensi = $id_presensi";
-        $cek = $this->db->query($sql);
-        return $cek->result();
+	
+	
 	
 	}
 

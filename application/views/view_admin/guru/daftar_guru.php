@@ -12,7 +12,7 @@
 		 <br><br>
 
 	<form>
-		<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+		<table id="datatable" class="table table-striped table-bordered">
 			<thead>
 			<tr align="center">
 				<td>NO</td>
@@ -42,8 +42,8 @@
 			 	<td><?php echo $gr->username; ?></td>
 			 	<td><?php echo $gr->foto; ?></td>
 			 	<td>
-			 	<?php echo anchor('admin/edit_guru/'.$gr->id_guru,'<i class="fas fa-edit"></i>'); ?>
-				<?php echo anchor('admin/hapus_guru/'.'?id='.$gr->id_guru ,'<i class="fas fa-trash-alt"></i>'); ?> 
+			 	<a href="<?php echo site_url('admin/edit_guru/'.$gr->id_guru); ?>" class="btn btn-sm btn-info">Edit</a>
+				 <a href="#" data-id="<?php echo $gr->id_guru ?>" class="sa-remove-guru btn btn-sm btn-danger">Hapus</a> 
 				</td>
 			 </tr>
 

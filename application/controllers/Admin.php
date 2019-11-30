@@ -142,7 +142,12 @@ class Admin extends CI_Controller
 	{
 
 		$this->db->delete('users', array('id'=> $this->input->get('id', FALSE)));
-		redirect('admin/daftar_user');
+		if ($this->db->error()){
+
+    	$this->session->set_flashdata('message','<div class="alert alert-info" role="alert">Data Tidak Bisa Hapus </div>');
+    	redirect('admin/daftar_user');
+
+								}
 	}	
 	
 
@@ -712,7 +717,7 @@ class Admin extends CI_Controller
 	}
 	public function edit_siswa($id_siswa)
 	{
-		$data['kelas'] = $this->m_data->tampil_rombel();
+		$data['kelas'] = $this->m_data->tampil_kelas();
 		//$data['presensi'] = $this->m_data->tampil_presensi()->result();
 		$data['siswa'] = $this->m_data->edit_siswa($id_siswa);
 		$data['content'] = 'view_admin/data_siswa/edit_siswa';
@@ -765,7 +770,12 @@ class Admin extends CI_Controller
 	{
 
 		$this->db->delete('siswa', array('id_siswa'=> $this->input->get('id', FALSE)));
-		redirect('admin/daftar_siswa');
+		if ($this->db->error()){
+
+    	$this->session->set_flashdata('message','<div class="alert alert-info" role="alert">Data Tidak Bisa Hapus </div>');
+    	redirect('admin/daftar_siswa');
+
+								}
 	}
 	function get_jadwalpresensi(){
         $id=$this->input->post('id');

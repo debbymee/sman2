@@ -1,4 +1,4 @@
-        <div class="col-md-12 col-sm-12 col-xs-12">
+
              <div class="x_panel">
 				<div class="container">
 
@@ -11,7 +11,7 @@
 		 <br><br>
 
 	<form>
-		<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+		<table id="datatable" class="table table-striped table-bordered">
 			<thead>
 			<tr align="center">
 				<td>NO</td>
@@ -51,8 +51,8 @@
 			 	<td><?php echo $sw->no_hp_ortu; ?></td>
 		
 			 	<td>
-			 	<?php echo anchor('admin/edit_siswa/'.$sw->id_siswa,'<i class="fas fa-edit"></i>'); ?>
-				<?php echo anchor('admin/hapus_siswa/'.'?id='.$sw->id_siswa ,'<i class="fas fa-trash-alt"></i>'); ?> 
+			 	<a href="<?php echo site_url('admin/edit_siswa/'.$sw->id_siswa); ?>" class="btn btn-sm btn-info">Edit</a>
+				 <a href="#" data-id="<?php echo $sw->id_siswa ?>" class="sa-remove-siswa btn btn-sm btn-danger">Hapus</a> 
 				</td>
 			 </tr>
 

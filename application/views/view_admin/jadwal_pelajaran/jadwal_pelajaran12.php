@@ -12,7 +12,7 @@
 
 
 	<form>
-			<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+			<table id="datatable" class="table table-striped table-bordered">
 			<thead>
 			<tr align="center">
 				
@@ -42,8 +42,8 @@
 			
 
 					<td>
-			 	<?php echo anchor('admin/edit_jadwal12/'.$jd->id_jadwal,'<i class="fas fa-edit"></i>'); ?>
-				<?php echo anchor('admin/hapus_jadwal12/'.'?id_jadwal='.$jd->id_jadwal ,'<i class="fas fa-trash-alt"></i>'); ?> 
+			 	<a href="<?php echo site_url('admin/edit_jadwal12/'.$jd->id_jadwal); ?>" class="btn btn-sm btn-info">Edit</a>
+				 <a href="#" data-id="<?php echo $jd->id_jadwal ?>" class="sa-remove-jadwal btn btn-sm btn-danger">Hapus</a> 
 				</td>
 					
 				

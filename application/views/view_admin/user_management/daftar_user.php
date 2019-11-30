@@ -14,7 +14,7 @@
 
 
 	<form>
-		<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+		<table id="datatable" class="table table-striped table-bordered">
 			<thead>
 			<tr align="center">
 				<td>No</td>
@@ -37,8 +37,8 @@
 			 	<td><?php echo $log->password ?></td>
 			 	<td><?php echo $log->role ?></td>
 			 	<td>
-			 	<?php echo anchor('admin/edit_user/'.$log->id,'<i class="fas fa-edit"></i>'); ?>
-				<?php echo anchor('admin/hapus_user/'.'?id='.$log->id,'<i class="fas fa-trash-alt"></i>'); ?> 
+			 	<a href="<?php echo site_url('admin/edit_user/'.$log->id); ?>" class="btn btn-sm btn-info">Edit</a>
+				 <a href="#" data-id="<?php echo $log->id ?>" class="sa-remove-user btn btn-sm btn-danger">Hapus</a>
 				</td>
 			 </tr>
 

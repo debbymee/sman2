@@ -31,7 +31,7 @@
 				$no = 1;
 				foreach ($wali as $gr){
 			 ?>
-				 <tr  style="color: black">
+				<tr align="center" style="color: black">
 			 	<td><?php echo $no++ ?></td>
 			 	<td><?php echo $gr->nama_guru ?></td>
 			 	<td><?php echo $gr->jk ?></td>

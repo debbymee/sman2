@@ -47,10 +47,9 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                  <div id="chart_plot_01" class="demo-placeholder"></div>
+                 <div id="container" class="col-md-8 col-sm-9 col-xs-12" style="height: 10%">
                 </div>
+                
                 <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
                   <div class="x_title">
                     <h2>Fitur Yang Sering Dikunjungi : </h2>
